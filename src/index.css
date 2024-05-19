@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add this CSS to your stylesheet */
+.group:hover .group-hover\:w-64 {
+  width: 16rem; /* 64 in Tailwind's width scale */
+}
