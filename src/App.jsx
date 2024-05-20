@@ -6,6 +6,7 @@ import RegisterSiswa from './components/RegisterSiswa'
 import Login from './components/Login'
 import Home from './layouts/Home'
 import Content from './pages/Content'
+import Kelas from './pages/Kelas'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
        <Route path='/login' element={<Login />} />
        <Route path='/home' element={<Home />} >
          <Route index element={<Content />} />
+         <Route path='class/:id' element={<Kelas />} />
        </Route>
      </Routes>
     </Router>

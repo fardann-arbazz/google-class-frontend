@@ -2,12 +2,55 @@ import React, { useState } from "react";
 import { faBars, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [namaKelas, setNamaKelas] = useState('');
+  const [mataPelajaran, setMataPelajaran] = useState('');
+  const [ruang, setRuang] = useState('');
+  const [msg, setMsg] = useState('');
+  const [isNotif, setIsNotif] = useState('');
+  const [classType, setClassType] = useState('')
+  const navigate = useNavigate()
 
   function getTokens() {
     return localStorage.getItem("token");
+  }
+
+  const handleKelas = async () => {
+    try {
+      setIsLoading(true)
+      const tokens = getTokens()
+      const response = await axios.post('http://localhost:8000/api/kelas', {
+        nama_kelas: namaKelas,
+        mata_pelajaran: mataPelajaran,
+        ruang
+      }, {
+        headers: {
+          'Authorization': `Bearer ${tokens}`
+        }
+      })
+      setIsNotif(true);
+      setTimeout(() => {
+        setIsNotif(false)
+        navigate('/home')
+      }, 2000)
+      setClassType('alert-success')
+      setMsg(response.data.message);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        setIsNotif(true);
+        setClassType('alert-success');
+        setTimeout(() => {
+          setIsNotif(false)
+        }, 2000)
+        setMsg(error.response.data.message);
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleLogout = async () => {
@@ -23,6 +66,8 @@ const Header = () => {
           },
         }
       );
+      localStorage.removeItem('token')
+      navigate('/login')
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
@@ -34,6 +79,12 @@ const Header = () => {
 
   return (
     <div className="navbar bg-base-100 px-5 border border-y-2 border-slate-200 z-30">
+      {isNotif && (
+        <div role="alert" className={`alert ${classType}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>{msg}</span>
+        </div>
+      )}
       <div className="flex-1 gap-1">
         <div className="btn btn-ghost btn-circle">
           <FontAwesomeIcon icon={faBars} className="text-2xl" />
@@ -54,7 +105,7 @@ const Header = () => {
             className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
           >
             <div className="card-body m-0">
-              <span 
+              <span
                 onClick={() =>
                   document.getElementById("my_modal_3").showModal()
                 } className="text-base font-medium cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-lg">
@@ -77,7 +128,7 @@ const Header = () => {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                src="https://static.vecteezy.com/system/resources/previews/036/280/651/original/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg"
               />
             </div>
           </div>
@@ -119,6 +170,7 @@ const Header = () => {
                 type="text"
                 placeholder="Nama Kelas"
                 className="input input-bordered"
+                onChange={(e) => setNamaKelas(e.target.value)}
               />
             </label>
             <label className="form-control">
@@ -129,6 +181,7 @@ const Header = () => {
                 type="text"
                 placeholder="Mata Pelajaran"
                 className="input input-bordered"
+                onChange={(e) => setMataPelajaran(e.target.value)}
               />
             </label>
             <label className="form-control">
@@ -139,11 +192,12 @@ const Header = () => {
                 type="text"
                 placeholder="Ruang"
                 className="input input-bordered"
+                onChange={(e) => setRuang(e.target.value)}
               />
             </label>
 
             <div className="flex justify-end items-end mt-3">
-              <button className="btn btn-ghost rounded-lg">Buat</button>
+              <button onClick={handleKelas} disabled={isLoading} className="btn btn-ghost rounded-lg">{isLoading ? 'Loading...' : 'Buat'}</button>
             </div>
           </div>
         </div>
