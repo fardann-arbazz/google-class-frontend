@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="h-screen z-50 bg-base-100 shadow-md border border-y-0 border-slate-200 flex flex-col group transition-all duration-300 ease-in-out w-16 hover:w-64">
+    <div className="h-screen fixed px-1 top-14 mt-3 z-50 bg-base-100 shadow-md border border-y-0 border-slate-200 flex flex-col group transition-all duration-300 ease-in-out w-16 hover:w-64">
       <nav className="flex flex-col font-medium flex-grow">
         <Link
           to='/home'

@@ -39,12 +39,12 @@ const Content = () => {
   }
 
   return (
-    <div className="flex h-96 py-4">
+    <div className="flex h-96 p-20">
       {kelas.totalElement !== 0 ? (
         kelas.map((classItem, i) => (
           <div className="flex px-10 py-2" key={i}>
             <div className="card card-compact w-72 h-72 bg-base-100 shadow-xl flex">
-              <figure className="relative" onClick={() => handleKelas(classItem.id)}><img src={imgRead} alt="Shoes" className=" h-28" /></figure>
+              <figure className="relative cursor-pointer" onClick={() => handleKelas(classItem.id)}><img src={imgRead} alt="Shoes" className="h-28" /></figure>
               <div className="card-body flex flex-col justify-between">
                 <h2 className="card-title absolute top-3 hover:underline cursor-pointer text-xl text-gray-200">{classItem.nama_kelas}</h2>
                 <div className="justify-end absolute top-3 btn-sm right-0 px-6 btn-ghost cursor-pointer btn-circle dropdown dropdown-right">
