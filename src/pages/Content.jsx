@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import imgContent from "../assets/buku.jpg";
+<<<<<<< HEAD
 import imgRead from '../assets/img_read.jpg';
+=======
+import imgRead from '../assets/img_read.jpg'
+>>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const Content = () => {
+<<<<<<< HEAD
   const [kelas, setKelas] = useState([]);
   const navigate = useNavigate();
 
@@ -25,18 +30,44 @@ const Content = () => {
   const getKelas = async () => {
     try {
       const tokens = getTokens();
+=======
+  const [kelas, setKelas] = useState([])
+  const navigate = useNavigate()
+
+  function getTokens() {
+    return localStorage.getItem('token')
+  }
+
+  useEffect(() => {
+    getKelas()
+  }, [])
+
+  const handleKelas = (id) => {
+    navigate(`class/${id}`)
+  }
+
+  const getKelas = async () => {
+    try {
+      const tokens = getTokens()
+>>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
       const response = await axios.get('http://localhost:8000/api/kelas', {
         headers: {
           'Authorization': `Bearer ${tokens}`
         }
+<<<<<<< HEAD
       });
       setKelas(response.data.kelas);
       console.log(response.data.kelas);
+=======
+      })
+      setKelas(response.data.kelas);
+>>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
       }
     }
+<<<<<<< HEAD
   };
 
   return (
@@ -54,6 +85,21 @@ const Content = () => {
                 </h2>
                 <div className="justify-end absolute top-3 btn-sm right-0 px-6 btn-ghost cursor-pointer btn-circle dropdown dropdown-right">
                   <FontAwesomeIcon icon={faEllipsisVertical} tabIndex={0} role="button" className="text-white text-base flex justify-center items-center" />
+=======
+  }
+
+  return (
+    <div className="flex h-96 p-20">
+      {kelas.totalElement !== 0 ? (
+        kelas.map((classItem, i) => (
+          <div className="flex px-10 py-2" key={i}>
+            <div className="card card-compact w-72 h-72 bg-base-100 shadow-xl flex">
+              <figure className="relative cursor-pointer" onClick={() => handleKelas(classItem.id)}><img src={imgRead} alt="Shoes" className="h-28" /></figure>
+              <div className="card-body flex flex-col justify-between">
+                <h2 className="card-title absolute top-3 hover:underline cursor-pointer text-xl text-gray-200">{classItem.nama_kelas}</h2>
+                <div className="justify-end absolute top-3 btn-sm right-0 px-6 btn-ghost cursor-pointer btn-circle dropdown dropdown-right">
+                  <FontAwesomeIcon icon={faEllipsisVertical} tabIndex={0} role="button" className="text-white text-base" />
+>>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
                   <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                     <li><a>Salin link undangan</a></li>
                     <li><a>Edit</a></li>
@@ -63,14 +109,23 @@ const Content = () => {
               </div>
               <div className="card-actions justify-end">
                 <div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
                 </div>
               </div>
             </div>
           </div>
         ))
       ) : (
+<<<<<<< HEAD
         <div className="flex justify-center items-center h-full w-full">
           <div className="flex flex-col items-center justify-center gap-3 max-w-xs md:max-w-md lg:max-w-lg p-4">
+=======
+        <div className="flex justify-center items-center h-screen ml-auto mr-auto">
+          <div className="flex flex-col items-center justify-center gap-3">
+>>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
             <img src={imgContent} alt="logooo" className="w-56" />
             <p className="font-medium text-gray-600 text-base">
               Tambahkan kelas untuk memulai
