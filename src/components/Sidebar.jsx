@@ -6,18 +6,19 @@ import {
   faUsersRectangle
 } from "@fortawesome/free-solid-svg-icons";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="h-screen z-50 bg-base-100 shadow-md border border-y-0 border-slate-200 flex flex-col group transition-all duration-300 ease-in-out w-16 hover:w-64">
+    <div className="h-screen fixed top-14 px-1 mt-3 z-50 bg-base-100 shadow-md border border-y-0 border-slate-200 flex flex-col group transition-all duration-300 ease-in-out w-16 hover:w-64">
       <nav className="flex flex-col font-medium flex-grow">
-        <a
-          href="#"
+        <Link
+          to='/home'
           className="sidebar-item flex items-center px-4 py-2 hover:bg-slate-100 rounded-full w-full"
         >
           <FontAwesomeIcon icon={faHome} className="mr-3" />
           <span className="ml-3 hidden group-hover:inline">Beranda</span>
-        </a>
+        </Link>
         <a
           href="#"
           className="sidebar-item flex items-center px-4 py-2 hover:bg-slate-100 rounded-full w-full"

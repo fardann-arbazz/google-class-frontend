@@ -15,15 +15,17 @@ const RegisterSiswa = () => {
   const handleRegister = async () => {
     try {
       setIsLoading(true);
-      setIsNotif(true);
-      setClassType("alert-success");
       const response = await axios.post("http://localhost:8000/api/siswa", {
         username,
         email,
         password,
       });
       setMsg(response.data.message);
-      navigate("/login");
+      setIsNotif(true);
+      setClassType("alert-success");
+      setTimeout(() =>{
+        navigate("/login");
+      }, 2000)
     } catch (error) {
       setIsNotif(true);
       setClassType("alert-error");
