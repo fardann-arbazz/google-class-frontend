@@ -11,12 +11,8 @@ const Header = () => {
   const [ruang, setRuang] = useState('');
   const [msg, setMsg] = useState('');
   const [isNotif, setIsNotif] = useState('');
-<<<<<<< HEAD
-  const [classType, setClassType] = useState('')
-=======
   const [classType, setClassType] = useState('');
   const [kodeKelas, setKodeKelas] = useState('');
->>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
   const navigate = useNavigate()
 
   function getTokens() {
@@ -58,8 +54,6 @@ const Header = () => {
     }
   }
 
-<<<<<<< HEAD
-=======
   const handleJoinClass = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -84,7 +78,6 @@ const Header = () => {
     }
   };
 
->>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
   const handleLogout = async () => {
     try {
       const tokens = getTokens();
@@ -109,13 +102,8 @@ const Header = () => {
     }
   };
 
-
   return (
-<<<<<<< HEAD
-    <div className="navbar fixed top-0 bg-base-100 px-2 border border-y-2 border-slate-200 z-50">
-=======
     <div className="navbar fixed top-0 bg-base-100 border border-y-2 border-slate-200 z-30">
->>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
       {isNotif && (
         <div role="alert" className={`alert ${classType}`}>
           <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -235,11 +223,7 @@ const Header = () => {
             </label>
 
             <div className="flex justify-end items-end mt-3">
-<<<<<<< HEAD
-              <button disabled={isLoading} onClick={handleKelas} className="btn btn-ghost rounded-lg">{isLoading ? 'Loading...' : 'Submit'}</button>
-=======
               <button onClick={handleKelas} disabled={isLoading} className="btn btn-ghost rounded-lg">{isLoading ? 'Loading...' : 'Buat'}</button>
->>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
             </div>
           </div>
         </div>

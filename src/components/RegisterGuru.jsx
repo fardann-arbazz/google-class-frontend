@@ -22,15 +22,10 @@ const RegisterGuru = () => {
       });
       setMsg(response.data.message);
       setIsNotif(true);
-<<<<<<< HEAD
       setClassType('alert-success');
       setTimeout(() => {
         navigate('/login')
       }, 2000)
-=======
-      setClassType('alert-success')
-      navigate('/login')
->>>>>>> 965b9c63a0e61384fd41fc58d8a8b47b4477558b
     } catch (error) {
       setIsNotif(true);
       setClassType('alert-error')

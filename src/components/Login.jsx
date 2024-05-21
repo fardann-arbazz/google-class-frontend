@@ -62,7 +62,7 @@ const Login = () => {
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="card shrink-0 w-[650px] max-w-sm shadow-2xl bg-base-100">
               <div className="card-body">
-                <h1 className="font-bold text-2xl text-center">Register Guru</h1>
+                <h1 className="font-bold text-2xl text-center">Login</h1>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Username</span>
