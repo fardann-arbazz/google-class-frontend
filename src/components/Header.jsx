@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { faBars, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -13,11 +13,20 @@ const Header = () => {
   const [isNotif, setIsNotif] = useState('');
   const [classType, setClassType] = useState('');
   const [kodeKelas, setKodeKelas] = useState('');
+  const [role, setRole] = useState('');
   const navigate = useNavigate()
 
   function getTokens() {
     return localStorage.getItem("token");
   }
+
+  function getRole() {
+    return localStorage.getItem('role')
+  }
+
+  useEffect(() => {
+   setRole(getRole())
+  }, [])
 
   const handleKelas = async () => {
     try {
@@ -92,7 +101,7 @@ const Header = () => {
         }
       );
       localStorage.removeItem('token')
-      navigate('/login')
+      navigate('/')
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
@@ -103,7 +112,7 @@ const Header = () => {
   };
 
   return (
-    <div className="navbar fixed top-0 bg-base-100 border border-y-2 border-slate-200 z-30">
+    <div className="navbar fixed top-0 bg-base-100 border border-b-2 border-slate-200 z-50">
       {isNotif && (
         <div role="alert" className={`alert ${classType}`}>
           <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -129,6 +138,7 @@ const Header = () => {
             tabIndex={0}
             className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
           >
+              {role === 'Guru' || role === 'Admin' ? (
             <div className="card-body m-0">
               <span
                 onClick={() =>
@@ -143,6 +153,16 @@ const Header = () => {
                 Gabung Kelas
               </span>
             </div>
+              ) : (
+              <div className="card-body m-0">
+                  <span
+                onClick={() => document.getElementById('my_modal_1').showModal()}
+                className="text-base font-medium cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-lg"
+              >
+                Gabung Kelas
+              </span>
+              </div>
+              )}
           </div>
         </div>
         <div className="dropdown dropdown-end">
@@ -172,7 +192,7 @@ const Header = () => {
               <a>Settings</a>
             </li>
             <li onClick={handleLogout}>
-              <a>{isLoading ? "Loading..." : "Logout"}</a>
+              <a>{isLoading ? <span className="loading loading-spinner loading-sm"></span> : "Logout"}</a>
             </li>
           </ul>
         </div>
@@ -223,7 +243,7 @@ const Header = () => {
             </label>
 
             <div className="flex justify-end items-end mt-3">
-              <button onClick={handleKelas} disabled={isLoading} className="btn btn-ghost rounded-lg">{isLoading ? 'Loading...' : 'Buat'}</button>
+              <button onClick={handleKelas} disabled={isLoading} className="btn btn-ghost rounded-lg">{isLoading ? <span className="loading loading-spinner loading-sm"></span> : 'Buat'}</button>
             </div>
           </div>
         </div>
@@ -262,7 +282,7 @@ const Header = () => {
                 onClick={handleJoinClass}
                 className={`btn-ghost px-3 py-1 ${!kodeKelas ? 'text-gray-500' : 'text-blue-500'} hover:bg-slate-100`}
               >
-                {isLoading ? 'Loading..' : 'Gabung'}
+                {isLoading ? <span className="loading loading-spinner loading-sm"></span> : 'Gabung'}
               </button>
             </form>
           </div>
